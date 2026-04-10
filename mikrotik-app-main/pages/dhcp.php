@@ -1,9 +1,14 @@
 <?php
+
 require '../lib/RouterOSAPI.php';
 require '../lib/helpers.php';
+//require '../lib/auth.php';
+//require '../config/auth.php';
 require '../config/config.php';
 
 requireLogin();
+
+
 
 $routerId = (int)get('id', 0);
 $router = getRouter($routerId);
@@ -20,14 +25,14 @@ if (!$ok) {
     redirectTo('?page=router_view&id=' . $routerId);
 }
 
-// Obtener entradas ARP
-$arpEntries = normalizeApiResponse($api->comm('/ip/arp/print'));
+// Obtener leases DHCP
+$leases = normalizeApiResponse($api->comm('/ip/dhcp-server/lease/print'));
 
-// Manejar la eliminación de una entrada ARP
+// Manejar la eliminación de un lease
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
-    $arpId = post('arp_id');
-    $api->comm('/ip/arp/remove', ['.id' => $arpId]);
-    setFlash('success', 'ARP entry deleted.');
-    redirectTo('?page=arp&id=' . $routerId);
+    $leaseId = post('lease_id');
+    $api->comm('/ip/dhcp-server/lease/remove', ['.id' => $leaseId]);
+    setFlash('success', 'Lease deleted.');
+    redirectTo('?page=dhcp&id=' . $routerId);
 }
 ?>

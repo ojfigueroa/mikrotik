@@ -1,5 +1,5 @@
 <?php
-// lib/helpers.php
+//lib/helpers.php
 
 /**
  * Convierte respuesta cruda de la API MikroTik
@@ -26,6 +26,13 @@ function parseResponse(array $raw): array {
     return $entries;
 }
 
+function requireLogin(){
+    if (!isUserLoggedIn()){
+        header('Location:
+        login.php');
+        exit;
+    }
+}
 /**
  * Escribe una línea en el log de auditoría
  */

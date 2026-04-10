@@ -20,14 +20,14 @@ if (!$ok) {
     redirectTo('?page=router_view&id=' . $routerId);
 }
 
-// Obtener entradas ARP
-$arpEntries = normalizeApiResponse($api->comm('/ip/arp/print'));
+// Obtener reglas de firewall
+$firewallRules = normalizeApiResponse($api->comm('/ip/firewall/filter/print'));
 
-// Manejar la eliminación de una entrada ARP
+// Manejar la eliminación de una regla de firewall
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
-    $arpId = post('arp_id');
-    $api->comm('/ip/arp/remove', ['.id' => $arpId]);
-    setFlash('success', 'ARP entry deleted.');
-    redirectTo('?page=arp&id=' . $routerId);
+    $firewallId = post('firewall_id');
+    $api->comm('/ip/firewall/filter/remove', ['.id' => $firewallId]);
+    setFlash('success', 'Firewall rule deleted.');
+    redirectTo('?page=firewall&id=' . $routerId);
 }
 ?>

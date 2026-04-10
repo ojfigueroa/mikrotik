@@ -43,6 +43,8 @@ try {
         $api->communicate(['/ip/dhcp-server/lease/print'])
     );
 
+
+
 } catch (Exception $e) {
     $routerData['error'] = $e->getMessage();
 } finally {
@@ -107,7 +109,7 @@ $staticArp  = countStaticArp($routerData['arp']);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MikroManager — Dashboard</title>
+  <title>ProyectoMikro — Dashboard</title>
   <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
@@ -116,7 +118,7 @@ $staticArp  = countStaticArp($routerData['arp']);
 <header class="topbar">
   <div class="logo">
     <span class="logo-dot"></span>
-    MikroManager
+    ProyectoMikro
   </div>
   <div class="topbar-right">
     <span class="router-info">
@@ -134,6 +136,7 @@ $staticArp  = countStaticArp($routerData['arp']);
     <?php endif; ?>
 
     <a href="logout.php" class="btn btn-danger">Desconectar</a>
+   
   </div>
 </header>
 
@@ -294,6 +297,11 @@ $staticArp  = countStaticArp($routerData['arp']);
     </div>
 
     <!-- ARP + Log -->
+
+<li class="nav-item"><a class="nav- link <?=
+
+get('page')==='arp'?'active':'' ?>" href="?page=arp&id=<?= (int) $router['id'] ?>">ARP</a></li>
+
     <div class="panels">
 
       <div class="panel">
