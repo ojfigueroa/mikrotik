@@ -1,0 +1,9 @@
+# 1. Crear usuario exclusivo para la API (nunca usar admin)
+/user add name=api_user password=ApiPass2025! group=full comment="Usuario para API"
+
+# 2. Habilitar el servicio API (puerto 8728 - para laboratorio)
+/ip service enable api
+/ip service set api port=8728
+
+# 3. Verificar que el servicio está activo
+/ip service print
